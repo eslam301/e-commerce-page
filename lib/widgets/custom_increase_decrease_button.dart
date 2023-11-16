@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
 
-class CustomIncreaseDecreaseButton extends StatelessWidget {
+class CustomIncreaseDecreaseButton extends StatefulWidget {
   const CustomIncreaseDecreaseButton({super.key});
 
+  @override
+  State<CustomIncreaseDecreaseButton> createState() => _CustomIncreaseDecreaseButtonState();
+}
+
+class _CustomIncreaseDecreaseButtonState extends State<CustomIncreaseDecreaseButton> {
+  int count = 1;
   @override
   Widget build(BuildContext context) {
     return
     Container(
-
       padding: EdgeInsets.symmetric(horizontal: 16, vertical: 11),
       decoration: BoxDecoration(
         color: Color(0xff004182),
@@ -20,19 +25,36 @@ class CustomIncreaseDecreaseButton extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          ImageIcon(
-            AssetImage('assets/icons/minus.png'),
-            color: CupertinoColors.white,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                if (count == 1) {
+                  return;
+                }
+                count--;
+              });
+            },
+            child: ImageIcon(
+              AssetImage('assets/icons/minus.png'),
+              color: CupertinoColors.white,
+            ),
           ),
-          Text("1",
+          Text("$count",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: CupertinoColors.white,
             ),),
-          ImageIcon(
-            AssetImage('assets/icons/plus.png'),
-            color: CupertinoColors.white,
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                count++;
+              });
+            },
+            child: ImageIcon(
+              AssetImage('assets/icons/plus.png'),
+              color: CupertinoColors.white,
+            ),
           )
         ]
       ),
